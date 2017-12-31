@@ -1,0 +1,25 @@
+From d9f8d2eda3fe6c3f6e0483550610ff5e0ded5e42 Mon Sep 17 00:00:00 2001
+From: eric <eric@vjessie.WeTube>
+Date: Fri, 25 Aug 2017 22:19:56 +0800
+Subject: [PATCH] make it compile on debian jessie
+
+---
+ arch/arm/config.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/config.mk b/arch/arm/config.mk
+index 1815d24..d3ecd8d 100644
+--- a/arch/arm/config.mk
++++ b/arch/arm/config.mk
+@@ -17,7 +17,7 @@ endif
+ ifneq ($(wildcard ../prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin),)
+ CROSS_COMPILE   ?= $(shell pwd)/../prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin/arm-eabi-
+ endif
+-CROSS_COMPILE ?= arm-linux-
++CROSS_COMPILE ?= arm-none-eabi-
+ 
+ ifndef CONFIG_STANDALONE_LOAD_ADDR
+ ifneq ($(CONFIG_OMAP_COMMON),)
+-- 
+2.1.4
+

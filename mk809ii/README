@@ -1,0 +1,47 @@
+Tutorial of running mainline linux on MK809II (rk3188).
+
+This tutorial is just a collection of resources that works on my little resources.
+Detail information and rational can be found by following links provided.
+I am using this tutorial to run debian stretch on my mk809ii as a headless armhf linux server.
+
+1. U-Boot (reference: http://wiki.radxa.com/Rock/U-Boot)
+
+    git clone -b u-boot-rk3188 https://github.com/radxa/u-boot-rockchip.git
+    cd u-boot-rockchip
+    make rk30xx
+
+Note: the code base is very old, I made a cross build on Debian Jessie on x86-64.
+with patch "0001-make-it-compile-on-debian-jessie.patch", a working u-boot is provided 
+as "u-boot-sd.img", md5sum:cb3e921a9f389c6aaff9b3b025d14555. 
+Write u-boot to SD card with command:
+
+    dd if=u-boot-sd.img of=/dev/sdx seek=64
+
+2. The parameter file (This is rockchip specific):
+
+    wget http://dl.radxa.com/rock/images/parameter/parameter_linux_sd
+    rkcrc -p parameter_linux_sd parameter.img
+
+Note: I just use the one provided by Radxa, rkcrc is part of the rockchip tool to flash image.
+Radxa provide the source on github. Here also provide the parameter.img, it's not need be 
+changed anyway.
+
+3. Kernel (linux-4.9.y) and dts and initramfs.
+    
+    make zImage dtb targz-pkg
+	cat arch/arm/boot/zImage arch/arm/boot/dts/rk3188-mk809iii.dtb > zImage-dtb
+
+Note: usb and sd card works, and with a usb ethernet card, it can be used as headless server, 
+with 4 cores and 2GB RAM. Example kernel configuration is provided. 
+By default, this kernel expect rootfs to be the first partition of SD card of type F2FS.
+
+    dd if=/dev/zero of=initrd.zero bs=1M count=1
+    abootimg 
+
+
+
+NOTE: use ethernet interface name issue!
+
+TODO: create a 1GB image and then use resize.f2fs to expand the partition!
+
+A precreated 1GB image
