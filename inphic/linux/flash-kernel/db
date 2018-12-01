@@ -1,0 +1,13 @@
+# To override fields include the Machine field and the fields you wish to
+# override.
+#
+# e.g. to override Boot-Device on the Dreamplug to sdb rather than sda
+#
+#Machine: Globalscale Technologies Dreamplug
+#Boot-Device: /dev/sdb1
+Machine: Inphic-I5-XiaoManTou
+Kernel-Flavors: armmp
+Boot-Script-Path: /boot/boot.scr
+DTB-Id: sun8i-h3-inphic-i5.dtb
+U-Boot-Script-Name: bootscr.sunxi
+Required-Packages: u-boot-tools

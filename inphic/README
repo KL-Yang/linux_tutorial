@@ -2,5 +2,7 @@ The Blue LED works, EMAC/USB works, Debian Buster on EMMC works.
 U-boot use orangepi-pc-plus.
 
 Actually all can use orangepi-pc-plus, except u-boot memory clock!
-To maintain compatibility, still name the dtb file as orangepi-pc-plus!
 Only LED does not work properly! No indication of power up!
+
+Note, for debian need patch up the flash-kernel setting, 
+otherwise each time kernel update might break the boot process.
