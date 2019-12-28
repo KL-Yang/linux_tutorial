@@ -1,0 +1,31 @@
+From 6396e75782537c89600b888ffaac2babd01b6393 Mon Sep 17 00:00:00 2001
+From: yangkunlun <yangkunlun@gmail.com>
+Date: Sat, 28 Dec 2019 12:34:53 +0800
+Subject: [PATCH 1/2] Fixed ethernet issue, seems related to WOL
+
+---
+ drivers/net/ethernet/stmicro/stmmac/stmmac_main.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+index 271a00f24..4edaf0c80 100644
+--- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
++++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+@@ -4378,10 +4378,10 @@ static int stmmac_hw_init(struct stmmac_priv *priv)
+ 	if (priv->plat->tx_coe)
+ 		dev_info(priv->device, "TX Checksum insertion supported\n");
+ 
+-	if (priv->plat->pmt) {
+-		dev_info(priv->device, "Wake-Up On Lan supported\n");
+-		device_set_wakeup_capable(priv->device, 1);
+-	}
++	//if (priv->plat->pmt) {
++		dev_info(priv->device, "Wake-Up On Lan disabled by yangkunlun@gmail.com\n");
++		device_set_wakeup_capable(priv->device, 0);
++	//}
+ 
+ 	if (priv->dma_cap.tsoen)
+ 		dev_info(priv->device, "TSO supported\n");
+-- 
+2.24.1
+
