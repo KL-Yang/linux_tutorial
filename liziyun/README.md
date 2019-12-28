@@ -3,7 +3,7 @@
 理论上有好几种方式可以实现这个功能，下面我们一一讨论。
 
 ## 更改启动脚本(boot.scr)
-可以实现插入USB启动镜像的时候使用USB的系统，拔出USB的时候启动EMMC的系统。
+可以实现插入USB（黑色2.0口）启动镜像的时候使用USB的系统，拔出USB的时候启动EMMC的系统。
 U-Boot在启动的时候会按照一定的顺序扫描EMMC/SD/USB寻找boot.scr或者extlinux系统，
 扫描顺序和寻找目标是可以配置的，armbian使用boot.scr来加载Linux内核，
 我们可以从它下手。Ayufan的镜像使用extlinux配置，暂时还未尝试如何使用extlinux启动USB镜像。
@@ -53,7 +53,8 @@ build/patch/u-boot/u-boot-rockchip64-default/board_z28pro/
 
 # 风扇控制(Fan Control)
 根据恩山用户rush(Ref:[1])提供的GPIO信息，
-可以配置fancontrol包，根据CPU或硬盘温度调节风扇转速。
+可以配置fancontrol包，根据CPU或硬盘温度调节风扇转速，
+但是转速无法调整，只能开关。
 TODO:加入配置方法
 
 # 使用BTRFS类型的ROOT分区
@@ -65,8 +66,5 @@ TODO:加入配置方法
 
 experiment:
 gradually remove unused part from dts!
-
-[    4.360551] sdmmc-regulator GPIO handle specifies active low - ignored
-[    4.361082] vcc-host-5v-regulator GPIO handle specifies active low - ignored
-[    4.361849] iommu: Default domain type: Translated
-
+when enable pwm, does not boot, todo, compile pwm as module to do the experiment!
+when 5.4 releases, assemble the harddrive into it!
